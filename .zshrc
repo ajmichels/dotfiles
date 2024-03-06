@@ -1,18 +1,18 @@
-setopt PROMPT_SUBST
-setopt HIST_VERIFY # print history command before executing it
-setopt INC_APPEND_HISTORY # add to history has commands execute
+setopt HIST_VERIFY # print history command before executing it (eg. !! or !:3)
+setopt INC_APPEND_HISTORY # add to history as commands execute
 setopt EXTENDED_HISTORY # include start and execution time in history
-setopt HIST_IGNORE_DUPS # don't capture reapeated commands multiple times
-setopt HIST_EXPIRE_DUPS_FIRST # remove duplicate commands when history is full
-setopt HIST_FIND_NO_DUPS # do not include any dups (even non-adjacent) in find (up arrow or search)
-setopt HIST_IGNORE_SPACE # commands run with leading space will not be stored in history
-setopt HIST_NO_STORE # do not store history or fc commands in the history
-setopt HIST_NO_FUNCTIONS # do not store function definition in the history
+setopt HIST_IGNORE_DUPS # do not capture repeated adjacent commands
+setopt HIST_EXPIRE_DUPS_FIRST # remove duplicate commands first when history is full
+setopt HIST_FIND_NO_DUPS # do not include any dups (event non-adjacent) in find results (up arrow or search)
+setopt HIST_IGNORE_SPACE # commands run with a leading space will not be stored in history
+setopt HIST_NO_STORE # do not store history or fc commands in the history (inspecting history will not contribute to history)
+setopt HIST_NO_FUNCTIONS # do not store function definitions in the history
 setopt CORRECT # attempt to correct mistyped commands
+setopt PROMPT_SUBST # add more feature for customizing the prompt
 
+# Set the PROMT apperance
 [[ $cmdcount -ge 1 ]] || cmdcount=1
 preexec() { ((cmdcount++)) }
-
 # username@hostname | shell-level prompt-count command-count history-num | current-directory prompt
 export PROMPT=$'\n''%B%F{cyan}%n@%M %F{white}%b| s$SHLVL p%i c$cmdcount h%h | %F{yellow}%~ %F{white}'$'\n''$ '
 
@@ -23,6 +23,7 @@ export PROMPT=$'\n''%B%F{cyan}%n@%M %F{white}%b| s$SHLVL p%i c$cmdcount h%h | %F
 eval "$(gh completion -s zsh)"
 #export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
+# Allow for using CTRL+<ARROW> to move through words in current command line
 bindkey "^[f" forward-word
 bindkey "^[b" backward-word
 
@@ -53,11 +54,19 @@ alias tree='exa -l --tree --git -I node_modules\|coverage\|vendor\|build\|dist'
 
 alias foobar='echo a:$0 b:$1 c:$2'
 alias run-http='docker run --rm -v "$PWD/$2:/usr/share/nginx/html" -p "8080:$1" nginx:latest'
+uuid () { uuidgen | tr "[:upper:]" "[:lower:]" } # Generate lower case UUID
+md () { mkdir -p "$@" && cd "$@"; } # Create directory structure and then change to it
+cl () { cd $* && ls; } # Change to directory then list contents
 
-# custom functions
-md () { mkdir -p "$@" && cd "$@"; }
-cl () { cd $* && ls; }
-uuid () { uuidgen | tr "[upper]" "[lower]" }
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pnpm
+export PNPM_HOME="~/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 # load other files (including machine specific ones)
 if [[ -d ~/.zshrc.d ]]; then

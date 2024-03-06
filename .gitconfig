@@ -1,0 +1,25 @@
+[include]
+    path = ~/.gitconfig.d/user.gitconfig
+[core]
+    editor = vim
+    excludesFile = ~/.gitignore-global
+[color]
+    ui = true
+    status = auto
+    log = auto
+    diff = auto
+    branch = auto
+    grep = auto
+    interactive = auto
+    pager = true
+    showbranch = auto
+[alias]
+    unstage = reset HEAD --
+    st = status -sb
+    ds = diff --staged
+[commit]
+    gpgsign = true
+[gpg]
+    ##format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers

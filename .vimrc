@@ -21,7 +21,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " ***** vim-airline *****
-let g:airline#extensions#tabline#enabled = 1 " enable buffer tabls at the top of the window
+let g:airline#extensions#tabline#enabled = 1 " enable buffer tabs at the top of the window
 let g:airline#extensions#tabline#buffer_nr_show = 1 " show buffer number in the top tabs
 
 " ***** gruvbox *****
@@ -48,27 +48,26 @@ let g:syntastic_check_on_open = 1 " check for errors when opening a file
 let g:syntastic_check_on_wq = 0 " don't check errors when doing write-quit
 let g:syntastic_javascript_checkers = [ 'eslint' ]
 let g:syntastic_javascript_eslint_generic = 1
-let g:syntastic_javascript_eslint_exec = '/bin/ls' " temporary ensure eslint check is available
-let g:syntastic_javascript_eslint_exe = '' " use bin dir for current project
-let g:syntastic_javascript_eslint_args = '-f compact' " ensure eslint output format is correct for syntactic
+let g:syntastic_javascript_eslint_exec = '/bin/ls' " temporary ensure eslint checker is available
+let g:syntastic_javascript_eslint_exe = '$(yarn bin)/eslint' " use bin in current project
+let g:syntastic_javascript_eslint_args = '-f compact' " ensure format is correct for Syntactic
 
-" ***** General settings *****
-
+" ***** General Config *****
 set number " always show line numbers
 set nowrap " do not wrap long lines
-set laststatus=2   " Always show the statusline
-set tabstop=4
+set laststatus=2 " always show the statusline
+set tabstop=4 " number of spaces a tab character will render as
 set softtabstop=0
-set expandtab
+set expandtab " use spaces when pressing the tab key
 set shiftwidth=4
-"set smarttab
-set smartindent
+set smartindent " automatically indent C-like programs
 set shell=/bin/zsh
-set incsearch " Show search result while typing
-set hlsearch " Highlight search results
+set incsearch " show search results while typing
+set hlsearch " highlight search results
 set background=dark
+set tags=.tags
 
 syntax enable
 
-" double j will return to normal mode from visual mode
-imap jj <Esc>
+" ***** Key Bindings *****
+imap jj <Esc> " double j will return to normal mode from insert mode
