@@ -20,53 +20,28 @@ export PROMPT=$'\n''%B%F{cyan}%n@%M %F{white}%b| s$SHLVL p%i c$cmdcount h%h | %F
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
+# The following lines were added by compinstall zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' ''
+zstyle :compinstall filename '~/.zshrc'
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# GitHub CLI command completion
 eval "$(gh completion -s zsh)"
-#export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
-# Allow for using CTRL+<ARROW> to move through words in current command line
-bindkey "^[f" forward-word
-bindkey "^[b" backward-word
-
+# NOTE: can't remember what this does, something with Broot
 source ~/.config/broot/launcher/bash/br
 
+export GPG_TTY=$(tty)
+
+# Initialize zoxide - a better cd command
+eval "$(zoxide init zsh)"
+
 # Run RVM so that we can automatically switch Ruby versions
-source ~/.rvm/scripts/rvm
-
-# Ensure NVM can automatically switch NodeJS versions
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# custom aliases
-alias ls='exa -l --git'
-alias cat=bat
-alias less='bat --pager=less'
-alias fgrep='fgrep -n --color=always';
-alias sha='openssl sha1';
-alias rsync="rsync --exclude-from ~/.rsync-exclude $*";
-alias sizes='du -sh * | sort -n'
-alias handbrake='HandBrakeCLI'
-alias sql=fisql
-alias vim='mvim -v'
-alias decolorize='sed "s/\x1B\[[0-9;]\{1,\}[A-Za-z]//g"'
-alias mdfind='mdfind -onlyin "$PWD"'
-alias tree='exa -l --tree --git -I node_modules\|coverage\|vendor\|build\|dist'
-
-alias foobar='echo a:$0 b:$1 c:$2'
-alias run-http='docker run --rm -v "$PWD/$2:/usr/share/nginx/html" -p "8080:$1" nginx:latest'
-uuid () { uuidgen | tr "[:upper:]" "[:lower:]" } # Generate lower case UUID
-md () { mkdir -p "$@" && cd "$@"; } # Create directory structure and then change to it
-cl () { cd $* && ls; } # Change to directory then list contents
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# pnpm
-export PNPM_HOME="~/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+if [[ -f ~/.rvm/scripts/rvm ]]; then
+    source ~/.rvm/scripts/rvm
+fi
 
 # load other files (including machine specific ones)
 if [[ -d ~/.zshrc.d ]]; then
