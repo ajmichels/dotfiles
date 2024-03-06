@@ -4,6 +4,7 @@ if [[ $SHLVL == 1 ]]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
 export XDG_CONFIG_HOME=~/.config
 export EDITOR=vim # set vim as the default editor
 export AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=1 # disable AWS SDK v3 warning
+export GPG_TTY=$(tty)
 
 # update PATH but avoid duplicates (.zshenv issue)
 typeset -U path

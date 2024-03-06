@@ -30,10 +30,8 @@ compinit
 # GitHub CLI command completion
 eval "$(gh completion -s zsh)"
 
-# NOTE: can't remember what this does, something with Broot
+# expose `br` function for running broot
 source ~/.config/broot/launcher/bash/br
-
-export GPG_TTY=$(tty)
 
 # Initialize zoxide - a better cd command
 eval "$(zoxide init zsh)"
