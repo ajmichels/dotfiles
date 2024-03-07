@@ -7,13 +7,13 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'pangloss/vim-javascript'
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'morhetz/gruvbox'
-Plugin 'lstwn/broot.vim'
-Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'airblade/vim-gitgutter' # adds deleted, added, modified indicators for each line in the left gutter
+Plugin 'vim-airline/vim-airline' # nice looking status bar with useful information
+Plugin 'pangloss/vim-javascript' # adds support for various JavaScript related features
+Plugin 'bronson/vim-trailing-whitespace' # highlights trailing whitespace in files
+Plugin 'morhetz/gruvbox' # color theme
+Plugin 'lstwn/broot.vim' # adds support for using Broot as a file navigator in vim
+Plugin 'christoomey/vim-tmux-navigator' # allow for better tmux integration
 Plugin 'tpope/vim-surround'
 Plugin 'vim-syntastic/syntastic'
 
