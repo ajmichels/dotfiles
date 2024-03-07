@@ -3,6 +3,7 @@
 [core]
     editor = vim
     excludesFile = ~/.gitignore-global
+    pager = bat --pager=less
 [color]
     ui = true
     status = auto
@@ -17,9 +18,26 @@
     unstage = reset HEAD --
     st = status -sb
     ds = diff --staged
+    last = log --stat HEAD^^..HEAD^
+    co = checkout
+    amend = commit --amend -C HEAD
+    undo = reset --soft HEAD^
+[push]
+    default = simple
+[init]
+    templatedir = ~/.git-hooks
+    defaultBranch = main
+[filter "media"]
+    clean = git-media-clean %f
+    smudge = git-media-smudge %f
+[filter "hawser"]
+    clean = git hawser clean %f
+    smudge = git hawser smudge %f
+    required = true
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 [commit]
     gpgsign = true
-[gpg]
-    ##format = ssh
-[gpg "ssh"]
-    allowedSignersFile = ~/.ssh/allowed_signers
