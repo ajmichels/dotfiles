@@ -18,3 +18,8 @@ folder of this project.
 
 This will create symbolic links in the project's parent directory which match
 the structure of the files contained within this project.
+
+## Usage Notes
+
+If certain "includes" need to be sourced before other make sure they are named
+alphabetically based on when they need to be sourced.

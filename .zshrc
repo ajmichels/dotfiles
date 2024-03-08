@@ -43,5 +43,7 @@ fi
 
 # load other files (including machine specific ones)
 if [[ -d ~/.zshrc.d ]]; then
-    source ~/.zshrc.d/*
+    for file in ~/.zshrc.d/*; do
+        source "$file"
+    done
 fi

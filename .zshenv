@@ -17,5 +17,7 @@ prj=~/projects
 
 # load other files (including machine specific ones)
 if [[ -d ~/.zshenv.d ]]; then
-    source ~/.zshenv.d/*
+    for file in ~/.zshenv.d/*; do
+        source "$file"
+    done
 fi
