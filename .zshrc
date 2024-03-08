@@ -13,8 +13,17 @@ setopt PROMPT_SUBST # add more feature for customizing the prompt
 # Set the PROMT apperance
 [[ $cmdcount -ge 1 ]] || cmdcount=1
 preexec() { ((cmdcount++)) }
+# alter prompt when in tmux
+if [[ -n "$TMUX" ]]; then
+    level=$(($SHLVL - 1))
+    promptPrefix='tmux'
+else
+    level=$SHLVL
+    promptPrefix='%n@%M'
+fi
+
 # username@hostname | shell-level prompt-count command-count history-num | current-directory prompt
-export PROMPT=$'\n''%B%F{cyan}%n@%M %F{white}%b| s$SHLVL p%i c$cmdcount h%h | %F{yellow}%~ %F{white}'$'\n''$ '
+export PROMPT=$'\n''%B%F{cyan}$promptPrefix %F{white}%b| s$level p%i c$cmdcount h%h | %F{yellow}%~ %F{white}'$'\n''$ '
 
 # tabtab source for packages
 # uninstall by removing these lines
