@@ -71,3 +71,11 @@ syntax enable
 
 " ***** Key Bindings *****
 imap jj <Esc> " double j will return to normal mode from insert mode
+
+" ***** Spell Checking *****
+augroup spellCheckingByFileType
+    autocmd!
+    autocmd ColorScheme gruvbox hi SpellBad ctermfg=red
+    autocmd FileType md,markdown setlocal spell spelllang=en_us
+    autocmd BufRead,BufNewFile *.md,COMMIT_EDITMSG setlocal spell spelllang=en_us
+augroup END
