@@ -1,5 +1,5 @@
 # custom aliases
-alias ls='exa -l --git'
+alias ls='eza -l --git --icons'
 alias cat=bat
 alias less='bat --pager=less'
 alias fgrep='fgrep -n --color=always';
@@ -11,7 +11,7 @@ alias sql=fisql
 alias vim='mvim -v'
 alias decolorize='sed "s/\x1B\[[0-9;]\{1,\}[A-Za-z]//g"'
 alias mdfind='mdfind -onlyin "$PWD"'
-alias tree='exa -l --tree --git -I node_modules\|coverage\|vendor\|build\|dist'
+alias tree='eza -l --tree --git --icons -I node_modules\|coverage\|vendor\|build\|dist'
 
 # serve directory via http - `run-http PORT [SUBDIRECTORY]`
 alias run-http='docker run --rm -v "$PWD/$2:/usr/share/nginx/html" -p "8080:$1" nginx:latest'
