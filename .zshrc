@@ -43,7 +43,7 @@ eval "$(gh completion -s zsh)"
 source ~/.config/broot/launcher/bash/br
 
 # Initialize zoxide - a better cd command
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # Run RVM so that we can automatically switch Ruby versions
 if [[ -f ~/.rvm/scripts/rvm ]]; then
