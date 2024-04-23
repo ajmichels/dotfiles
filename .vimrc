@@ -9,6 +9,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter' " adds deleted, added, modified indicators for each line in the left gutter
 Plugin 'vim-airline/vim-airline' " nice looking status bar with useful information
+Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 Plugin 'pangloss/vim-javascript' " adds support for various JavaScript related features
 Plugin 'bronson/vim-trailing-whitespace' " highlights trailing whitespace in files
 Plugin 'morhetz/gruvbox' " color theme
@@ -23,6 +24,9 @@ filetype plugin indent on    " required
 " ***** vim-airline *****
 let g:airline#extensions#tabline#enabled = 1 " enable buffer tabs at the top of the window
 let g:airline#extensions#tabline#buffer_nr_show = 1 " show buffer number in the top tabs
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " change how buffer names are formatted
+let g:airline_powerline_fonts = 1 " automatically populate the g:airline_symbols dictionary with the powerline symbols
+let g:airline_theme='base16_gruvbox_dark_hard'
 
 " ***** gruvbox *****
 autocmd vimenter * ++nested colorscheme gruvbox
