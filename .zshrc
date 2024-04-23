@@ -39,9 +39,6 @@ compinit
 # GitHub CLI command completion
 eval "$(gh completion -s zsh)"
 
-# expose `br` function for running broot
-source ~/.config/broot/launcher/bash/br
-
 # Initialize zoxide - a better cd command
 eval "$(zoxide init --cmd cd zsh)"
 

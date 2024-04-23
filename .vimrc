@@ -13,7 +13,7 @@ Plugin 'vim-airline/vim-airline-themes' " set of themes for airline
 Plugin 'pangloss/vim-javascript' " adds support for various JavaScript related features
 Plugin 'bronson/vim-trailing-whitespace' " highlights trailing whitespace in files
 Plugin 'morhetz/gruvbox' " color theme
-Plugin 'lstwn/broot.vim' " adds support for using Broot as a file navigator in vim
+Plugin 'junegunn/fzf' " fzf support in vim
 Plugin 'christoomey/vim-tmux-navigator' " allow for better tmux integration
 Plugin 'tpope/vim-surround'
 Plugin 'vim-syntastic/syntastic'
@@ -33,13 +33,6 @@ autocmd vimenter * ++nested colorscheme gruvbox
 
 " ***** vim-javascript *****
 let g:javascript_plugin_jsdoc = 1 " Enable syntax highlighting for JSDoc blocks
-
-" ***** broot *****
-let g:broot_default_conf_path = expand('~/.config/broot/conf.hjson')
-let g:broot_replace_netrw = 1 " use broot instead of vim file browser (netrw)
-let g:loaded_netrwPlugin = 1
-nnoremap <silent> <leader>e :BrootWorkingDir<CR>
-nnoremap <silent> - :BrootCurrentDir<CR>
 
 " ***** Syntastic *****
 set statusline+=%#warningmsg#
@@ -75,6 +68,7 @@ syntax enable
 
 " ***** Key Bindings *****
 imap jj <Esc> " double j will return to normal mode from insert mode
+nnoremap <silent> <C-p> :FZF<CR>
 
 " ***** Spell Checking *****
 augroup spellCheckingByFileType
