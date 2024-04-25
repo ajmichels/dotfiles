@@ -17,8 +17,11 @@ export FZF_CTRL_T_OPTS="
     --bind 'ctrl-/:change-preview-window(down|hidden|)'
     "
 export FZF_CTRL_R_OPTS="
-    --preview 'bat -n --color=always {}'
-    --bind 'ctrl-/:toggle-preview'
+    --preview 'echo {}'
+    --preview-window down:10:wrap
+    --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+    --color header:italic
+    --header 'Press CTRL-Y to copy command into clipboard'
     "
 export FZF_ALT_C_OPTS="
     --preview 'tree -C {}'
