@@ -24,3 +24,21 @@ md () { mkdir -p "$@" && cd "$@"; }
 
 # Change to directory then list contents
 cl () { cd $* && ls; }
+
+function prompt_zsh_shell_level() {
+    if [[ -n "$TMUX" ]]; then
+        level=$(($SHLVL - 1))
+        #promptPrefix='tmux'
+    else
+        level=$SHLVL
+        #promptPrefix='%n@%M'
+    fi
+
+    p10k segment -f yellow -t "s${level}"
+}
+
+function prompt_tmux_check() {
+    if [[ -n "$TMUX" ]]; then
+        p10k segment -f blue -t "tmux"
+    fi
+}
