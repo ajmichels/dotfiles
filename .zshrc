@@ -10,6 +10,12 @@ setopt HIST_NO_FUNCTIONS # do not store function definitions in the history
 setopt CORRECT # attempt to correct mistyped commands
 setopt PROMPT_SUBST # add more feature for customizing the prompt
 
+# Make sure Zinit is installed
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
 # Set the PROMT apperance
 [[ $cmdcount -ge 1 ]] || cmdcount=1
 preexec() { ((cmdcount++)) }
