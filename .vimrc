@@ -63,12 +63,17 @@ set incsearch " show search results while typing
 set hlsearch " highlight search results
 set background=dark
 set tags=.tags
+set list listchars=tab:\|_,extends:>,precedes:<,conceal:*,nbsp:· " display whitespace characters
 
 syntax enable
 
 " ***** Key Bindings *****
 imap jj <Esc> " double j will return to normal mode from insert mode
 nnoremap <silent> <C-p> :FZF<CR>
+
+" Highlighting overrides
+
+hi! link NonText GruvboxBg0
 
 " ***** Spell Checking *****
 augroup spellCheckingByFileType
