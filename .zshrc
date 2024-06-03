@@ -26,6 +26,15 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Zinit packages
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Load completions
+autoload -U compinit && compinit
+
+zinit cdreplay -q # replay cache completion
 
 # Set the PROMT apperance
 [[ $cmdcount -ge 1 ]] || cmdcount=1
@@ -48,6 +57,9 @@ export PROMPT=$'\n''%B%F{cyan}$promptPrefix %F{white}%b| s$level p%i c$cmdcount 
 
 # The following lines were added by compinstall zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' ''
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle :compinstall filename '~/.zshrc'
 autoload -Uz compinit
 compinit
