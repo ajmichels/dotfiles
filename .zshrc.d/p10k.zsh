@@ -103,6 +103,9 @@
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
 
+  # NVM version
+  typeset -g POWERLEVEL9K_NVM_FOREGROUND=6
+
   # Blue current directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
 
