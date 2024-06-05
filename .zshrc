@@ -2,7 +2,6 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=off # having issues with instant prompt warning always displaying
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -63,3 +62,6 @@ if [[ -d ~/.zshrc.d ]]; then
         source "$file"
     done
 fi
+
+# To customize prompt, run `p10k configure` or edit ~/.zshrc.d/p10k.zsh.
+[[ ! -f ~/.zshrc.d/p10k.zsh ]] || source ~/.zshrc.d/p10k.zsh
