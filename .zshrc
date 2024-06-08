@@ -40,26 +40,14 @@ zinit light jeffreytse/zsh-vi-mode
 zinit light lukechilds/zsh-nvm
 
 # Load completions
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
 
 zinit cdreplay -q # replay cache completion
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
-# The following lines were added by compinstall zstyle ':completion:*' completer _complete _ignored
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' ''
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle :compinstall filename '~/.zshrc'
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-# GitHub CLI command completion
-eval "$(gh completion -s zsh)"
 
 # Initialize zoxide - a better cd command
 eval "$(zoxide init --cmd cd zsh)"
