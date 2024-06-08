@@ -66,7 +66,8 @@
     zsh_shell_level
     command_execution_time    # previous command duration
     virtualenv                # python virtual environment
-    nvm
+    nvm                       # show nvm version number
+    aws                       # show current AWS profile
     context                   # user@host
     # time                    # current time
     # =========================[ Line #2 ]=========================
