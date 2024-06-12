@@ -62,4 +62,6 @@ white = '#EBDBB2'
 
 [keyboard]
 bindings = [
+{ key = 'L', mods = 'Command | Shift', action = 'SelectNextTab' },
+{ key = 'H', mods = 'Command | Shift', action = 'SelectPreviousTab' },
 ]
