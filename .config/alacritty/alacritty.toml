@@ -1,0 +1,65 @@
+working_directory = 'None' # start in working directory of parent process
+live_config_reload = true # reload config when changes are detected
+
+[shell]
+program = '/bin/zsh'
+args = [ '-l' ] # use profile
+
+[window]
+dimensions = { columns = 150, lines = 65 }
+padding = { x = 0, y = 0 }
+decorations = 'Full'
+opacity = 1.0
+blur = false
+startup_mode = 'Windowed'
+dynamic_title = true
+decorations_theme_variant = "Dark"
+resize_increments = true # when resizing do so by column/line increments
+
+[scrolling]
+history = 10000
+
+[font]
+size = 15
+normal = { family="Hack Nerd Font", style="Regular" }
+bold = { family="Hack Nerd Font", style="Bold" }
+italic = { family="Hack Nerd Font", style="Italic" }
+bold_italic = { family="Hack Nerd Font", style="Bold Italic" }
+
+[colors]
+
+[colors.cursor]
+text = '#EBDBB2'
+cursor = '#EBDBB2'
+
+[colors.primary]
+background = '#1F1F1F'
+foreground = '#EBDBB2'
+
+[colors.selection]
+text = '#3C3836'
+background = '#EBDBB2'
+
+[colors.normal]
+black = '#282828'
+red = '#CC241D'
+green = '#98971A'
+yellow = '#D79921'
+blue = '#458588'
+magenta = '#B16286'
+cyan = '#689D6A'
+white = '#A89984'
+
+[colors.bright]
+black = '#928374'
+red = '#FB4934'
+green = '#B8BB26'
+yellow = '#FABD2F'
+blue = '#83A598'
+magenta = '#D4879C'
+cyan = '#8EC07C'
+white = '#EBDBB2'
+
+[keyboard]
+bindings = [
+]
