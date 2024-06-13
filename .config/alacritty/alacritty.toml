@@ -29,7 +29,7 @@ bold_italic = { family="Hack Nerd Font", style="Bold Italic" }
 [colors]
 
 [colors.cursor]
-text = '#EBDBB2'
+text = '#1F1F1F'
 cursor = '#EBDBB2'
 
 [colors.primary]
