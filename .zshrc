@@ -39,7 +39,7 @@ zinit light Aloxaf/fzf-tab
 zinit light lukechilds/zsh-nvm
 
 # Load completions
-autoload -Uz compinit && compinit
+autoload -U compinit && compinit
 
 zinit cdreplay -q # replay cache completion
 
