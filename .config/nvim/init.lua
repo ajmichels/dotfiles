@@ -104,6 +104,9 @@ vim.o.wrap = false
 -- set spelling language
 vim.opt.spelllang = 'en_us'
 
+-- show search results as typing
+vim.o.incsearch = true
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
