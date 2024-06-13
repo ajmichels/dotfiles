@@ -578,6 +578,7 @@ require('lazy').setup({
         -- tsserver = {},
         --
 
+        -- Lua Language Server configuration config
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -589,6 +590,19 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+            },
+          },
+        },
+
+        -- TypeScript Language Service configuration
+        tsserver = {
+          settings = {
+            diagnostics = {
+              ignoredCodes = {
+                7016, -- not finding module
+                6133, -- unused function arguments
+                2579, -- unfound types in docblocks
+              },
             },
           },
         },
