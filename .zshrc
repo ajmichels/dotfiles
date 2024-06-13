@@ -14,8 +14,6 @@ setopt HIST_FIND_NO_DUPS # do not include any dups (event non-adjacent) in find 
 setopt HIST_IGNORE_SPACE # commands run with a leading space will not be stored in history
 setopt HIST_NO_STORE # do not store history or fc commands in the history (inspecting history will not contribute to history)
 setopt HIST_NO_FUNCTIONS # do not store function definitions in the history
-setopt CORRECT # attempt to correct mistyped commands
-setopt PROMPT_SUBST # add more feature for customizing the prompt
 
 # Make sure Zinit is installed
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
