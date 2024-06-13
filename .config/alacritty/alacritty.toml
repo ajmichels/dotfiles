@@ -6,7 +6,7 @@ program = '/bin/zsh'
 args = [ '-l' ] # use profile
 
 [window]
-dimensions = { columns = 150, lines = 65 }
+dimensions = { columns = 150, lines = 60 }
 padding = { x = 0, y = 0 }
 decorations = 'Full'
 opacity = 1.0
