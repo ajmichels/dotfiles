@@ -196,6 +196,15 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
+
+      eslint = {},
+      commitlint = {},
+      yamllint = {},
+      markdownlint = {},
+      jsonlint = {},
+
+      dockerls = {}, -- Dockerfiles
+      docker_compose_language_service = {}, -- Docker Compose files
     }
 
     -- Ensure the servers and tools above are installed
