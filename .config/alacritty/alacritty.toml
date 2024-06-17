@@ -43,23 +43,29 @@ background = '#EBDBB2'
 
 [colors.normal]
 black = '#282828'
-red = '#CC241D'
-green = '#98971A'
-yellow = '#D79921'
-blue = '#458588'
-magenta = '#B16286'
-cyan = '#689D6A'
+red = '#B63833' # red = '#CC241D'
+green = '#87872B' # green = '#98971A'
+yellow = '#BE913A' # yellow = '#D79921'
+blue = '#4F7C7E' # blue = '#458588'
+magenta = '#A37087' # magenta = '#B16286'
+cyan = '#729374' # cyan = '#689D6A'
 white = '#A89984'
+
+#orange = '#BC6228'
+
+#gray = '#928374'
 
 [colors.bright]
 black = '#928374'
-red = '#FB4934'
-green = '#B8BB26'
-yellow = '#FABD2F'
-blue = '#83A598'
-magenta = '#D4879C'
-cyan = '#8EC07C'
+red = '#E15E4E' # red = '#FB4934'
+green = '#A8AA37' # green = '#B8BB26'
+yellow = '#DBB14E' # yellow = '#FABD2F'
+blue = '#87A197' # blue = '#83A598'
+magenta = '#C693A1' # magenta = '#D4879C'
+cyan = '#93B587' # cyan = '#8EC07C'
 white = '#EBDBB2'
+
+# orange = '#DF8337'
 
 [keyboard]
 bindings = [

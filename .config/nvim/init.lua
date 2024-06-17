@@ -44,6 +44,11 @@ vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.colorcolumn = '100' -- create a ruler on column 100
 
+vim.opt.tabstop = 4 -- number of spaces a tab character will render as
+vim.opt.softtabstop = 0
+vim.o.expandtab = true -- use spaces when pressing the tab key
+vim.opt.shiftwidth = 4
+
 -- [[ Basic Keymaps ]] See `:help vim.keymap.set()`
 
 vim.opt.hlsearch = true -- Set highlight on search, but clear on pressing <Esc> in normal mode
