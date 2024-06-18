@@ -192,6 +192,7 @@ return { -- LSP Configuration & Plugins
               7016, -- not finding module
               6133, -- unused function arguments
               2579, -- unfound types in docblocks
+              80001, -- File is a CommonJS module; it may be converted to an ES module.
             },
           },
         },
