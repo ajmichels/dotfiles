@@ -64,7 +64,7 @@ set hlsearch " highlight search results
 set background=dark
 set tags=.tags
 set list listchars=tab:\|_,extends:>,precedes:<,conceal:*,nbsp:· " display whitespace characters
-set colorcolumn='100' " add column ruler at line 100
+set colorcolumn=100 " add column ruler at line 100
 
 syntax enable
 
