@@ -18,7 +18,8 @@ return {
   },
   keys = {
     { '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[O]bsidian [S]earch' },
-    { '<leader>on', ':ObsidianNew', desc = '[O]obsidian [N]ew Note' },
+    { '<leader>oq', '<cmd>ObsidianQuickSwitch<cr>', desc = '[O]bsidian [Q]uick Switch' },
+    { '<leader>on', ':ObsidianNew', desc = '[O]bsidian [N]ew Note' },
     { '<leader>ob', '<cmd>ObsidianBacklinks<cr>', desc = '[O]bsidian [B]acklinks' },
     { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = '[O]bsidian [T]ags' },
     { '<leader>od', '<cmd>ObsidianDailies<cr>', desc = '[O]bsidian [D]ailies' },
