@@ -17,7 +17,7 @@ return {
     'nvim-treesitter', -- optional
   },
   keys = {
-    { '<leader>os', '<cmd>ObsidianQuickSwitch<cr>', desc = '[O]bsidian Quick [S]witch' },
+    { '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[O]bsidian [S]earch' },
     { '<leader>on', ':ObsidianNew', desc = '[O]obsidian [N]ew Note' },
     { '<leader>ob', '<cmd>ObsidianBacklinks<cr>', desc = '[O]bsidian [B]acklinks' },
     { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = '[O]bsidian [T]ags' },
@@ -37,6 +37,8 @@ return {
     },
   },
   opts = {
+    disable_frontmatter = true, -- don't manage frontmatter automatically
+
     workspaces = {
       require 'local.obsidian',
       -- {
