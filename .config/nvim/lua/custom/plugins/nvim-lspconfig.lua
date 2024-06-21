@@ -168,7 +168,7 @@ return { -- LSP Configuration & Plugins
       -- tsserver = {},
       --
 
-      -- Lua Language Server configuration config
+      -- Lua Language Server configuration
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
