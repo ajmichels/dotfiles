@@ -203,6 +203,7 @@ return { -- LSP Configuration & Plugins
       yamllint = {},
       markdownlint = {},
       jsonlint = {},
+      vacuum = {},
 
       dockerls = {}, -- Dockerfiles
       docker_compose_language_service = {}, -- Docker Compose files

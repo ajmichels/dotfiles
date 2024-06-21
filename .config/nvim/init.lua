@@ -44,6 +44,16 @@ vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.colorcolumn = '100' -- create a ruler on column 100
 
+-- add filetype patterns for OpenAPI and Swagger
+vim.filetype.add {
+  pattern = {
+    ['openapi.*%.ya?ml'] = 'yaml.openapi',
+    ['openapi.*%.json'] = 'json.openapi',
+    ['swagger.*%.ya?ml'] = 'yaml.openapi',
+    ['swagger.*%.json'] = 'json.openapi',
+  },
+}
+
 vim.opt.tabstop = 4 -- number of spaces a tab character will render as
 vim.opt.softtabstop = 0
 vim.o.expandtab = true -- use spaces when pressing the tab key
