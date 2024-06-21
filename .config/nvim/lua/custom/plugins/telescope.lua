@@ -11,6 +11,24 @@ return { -- Fuzzy Finder (files, lsp, etc)
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    {
+      'aaronhallaert/advanced-git-search.nvim',
+      cmd = { 'AdvancedGitSearch' },
+      keys = {
+        { '<leader>Gs', '<cmd>AdvancedGitSearch search_log_content<cr>', desc = '[G]it [S]earch' },
+      },
+      dependencies = {
+        -- to show diff splits and open commits in browser
+        'tpope/vim-fugitive',
+
+        -- to open commits in browser with fugitive
+        'tpope/vim-rhubarb',
+
+        -- optional: to replace the diff from fugitive with diffview.nvim
+        -- (fugitive is still needed to open in browser)
+        'sindrets/diffview.nvim',
+      },
+    },
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
       'nvim-telescope/telescope-fzf-native.nvim',
 
@@ -62,6 +80,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
       -- },
       -- pickers = {}
       extensions = {
+        advanced_git_search = {
+          diff_plugin = 'diffview',
+        },
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
@@ -71,6 +92,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension, 'advanced_git_search')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
