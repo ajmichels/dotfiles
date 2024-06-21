@@ -4,7 +4,7 @@ return {
   opts = {
     theme = 'gruvbox_dark',
   },
-  config = function(_, opts)
+  config = function()
     -- local custom_gruvbox = require'lualine.themes.gruvbox'
     local colors = {
       black = '#282828',
