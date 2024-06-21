@@ -42,10 +42,6 @@ return {
 
     workspaces = {
       require 'local.obsidian',
-      -- {
-      --   name = 'personal',
-      --   path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes',
-      -- },
     },
 
     -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
