@@ -27,6 +27,8 @@ return {
     { '<leader>or', ':ObsidianRename', desc = '[O]bsidian [R]ename' },
     { '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[O]bsidian [O]pen' },
     { '<leader>op', ':ObsidianPasteImg', desc = '[O]bsidian [P]aste Image' },
+    { '<leader>oW', '<cmd>ObsidianWorkspace<cr>', desc = '[O]bsidian [W]orkspace' },
+    { '<leader>oT', '<cmd>ObsidianTemplate<cr>', desc = '[O]bsidian [T]emplate' },
     {
       '<leader>ow',
       function()
@@ -38,11 +40,7 @@ return {
     },
   },
   opts = {
-    disable_frontmatter = true, -- don't manage frontmatter automatically
-
-    workspaces = {
-      require 'local.obsidian',
-    },
+    disable_frontmatter = false,
 
     -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
     completion = {
@@ -95,4 +93,13 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    local localConfig = require 'local.obsidian'
+
+    for k, v in pairs(localConfig) do
+      opts[k] = v
+    end
+
+    require('obsidian').setup(opts)
+  end,
 }
