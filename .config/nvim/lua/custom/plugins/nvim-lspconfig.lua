@@ -198,7 +198,20 @@ return { -- LSP Configuration & Plugins
         },
       },
 
-      eslint = {},
+      eslint = {
+        flags = { debounce_text_changes = 500 },
+        on_attach = function(client)
+          local au_lsp = vim.api.nvim_create_augroup('eslint_lsp', { clear = true })
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            pattern = '*',
+            callback = function()
+              vim.lsp.buf.format { id = client.id }
+            end,
+            group = au_lsp,
+          })
+        end,
+      },
+
       commitlint = {},
       yamllint = {},
       markdownlint = {},
