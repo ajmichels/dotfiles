@@ -100,6 +100,25 @@ return {
       opts[k] = v
     end
 
-    require('obsidian').setup(opts)
+    local obsidian = require 'obsidian'
+    local pickers = require 'telescope.pickers'
+    -- local finders = require 'telescope.finders'
+    local conf = require('telescope.config').values
+
+    local weeklyPicker = pickers.new({}, {
+      prompt_title = 'Weekly Notes',
+      finder = function()
+        return {
+          result = { 'red', 'gree', 'blue' },
+        }
+      end,
+      sorter = conf.generic_sorter {},
+    })
+
+    vim.api.nvim_create_user_command('FooBarBaz', function()
+      weeklyPicker:find()
+    end, {})
+
+    obsidian.setup(opts)
   end,
 }
