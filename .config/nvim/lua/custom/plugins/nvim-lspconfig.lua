@@ -213,7 +213,7 @@ return { -- LSP Configuration & Plugins
       },
 
       commitlint = {},
-      yamllint = {},
+      --yamllint = {},
       markdownlint = {},
       jsonlint = {},
       vacuum = {},
