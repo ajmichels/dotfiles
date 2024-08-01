@@ -119,15 +119,14 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 -- Install, update, and remove plugins, run `:Lazy`
 require('lazy').setup({
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'christoomey/vim-tmux-navigator', -- making moving from vim in tmux to another pane easier
-
-  require 'kickstart.plugins.indent_line',
-  require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.debug',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  {
+    'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+    version = 'v2.0',
+  },
+  {
+    'christoomey/vim-tmux-navigator', -- making moving from vim in tmux to another pane easier
+    version = 'v1.0',
+  },
 
   -- See `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' }, -- load plugins from `lua/custom/plugins/*.lua`

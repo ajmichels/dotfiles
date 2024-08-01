@@ -1,10 +1,12 @@
 return { -- Autocompletion
   'hrsh7th/nvim-cmp',
+  version = 'v0.0.1',
   event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     {
       'L3MON4D3/LuaSnip',
+      version = 'v2.3.0',
       build = (function()
         -- Build Step is needed for regex support in snippets.
         -- This step is not supported in many windows environments.
@@ -26,12 +28,12 @@ return { -- Autocompletion
         -- },
       },
     },
-    'saadparwaiz1/cmp_luasnip',
+    'saadparwaiz1/cmp_luasnip', -- developer does not maintain tagged versions
 
     -- Adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. They are split
     --  into multiple repos for maintenance purposes.
-    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp', -- no tagged versions
     'hrsh7th/cmp-path',
   },
   config = function()
@@ -99,7 +101,7 @@ return { -- Autocompletion
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
       },
-      sources = {
+      sources = { -- no way to specify versions of these packages
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },

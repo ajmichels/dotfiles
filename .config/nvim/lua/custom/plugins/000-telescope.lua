@@ -19,18 +19,22 @@ return { -- Fuzzy Finder (files, lsp, etc)
       },
       dependencies = {
         -- to show diff splits and open commits in browser
-        'tpope/vim-fugitive',
+        {
+          'tpope/vim-fugitive',
+          version = 'v3.7',
+        },
 
         -- to open commits in browser with fugitive
-        'tpope/vim-rhubarb',
+        'tpope/vim-rhubarb', -- developer does not maintain tagged versions
 
         -- optional: to replace the diff from fugitive with diffview.nvim
         -- (fugitive is still needed to open in browser)
-        'sindrets/diffview.nvim',
+        'sindrets/diffview.nvim', -- no tagged versions
       },
     },
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
       'nvim-telescope/telescope-fzf-native.nvim',
+      -- version = '', developer does not maintained tagged versions
 
       -- `build` is used to run some command when the plugin is installed/updated.
       -- This is only run then, not every time Neovim starts up.
@@ -42,7 +46,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+    {
+      'nvim-telescope/telescope-ui-select.nvim',
+      -- version = '' developer does not maintain tagged versions
+    },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },

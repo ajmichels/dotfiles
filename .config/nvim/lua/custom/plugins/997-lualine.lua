@@ -1,5 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
+  -- version = '', The author of this plugin doesn't seem to release tagged versions
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
     theme = 'gruvbox_dark',

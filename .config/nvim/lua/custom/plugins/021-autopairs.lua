@@ -3,9 +3,13 @@
 
 return {
   'windwp/nvim-autopairs',
+  enabled = false,
+  -- version = '', The developer of this plugin does not maintain taged version
   event = 'InsertEnter',
   -- Optional dependency
-  dependencies = { 'hrsh7th/nvim-cmp' },
+  dependencies = {
+    'hrsh7th/nvim-cmp',
+  },
   config = function()
     require('nvim-autopairs').setup {}
     -- If you want to automatically add `(` after selecting a function or method

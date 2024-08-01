@@ -1,18 +1,36 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
+  version = 'v0.1.8',
   dependencies = {
+
     -- Automatically install LSPs and related tools to stdpath for Neovim
-    { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
-    'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    -- NOTE: Must be loaded before dependants
+    {
+      'williamboman/mason.nvim',
+      version = 'v1.10.0',
+      config = true,
+    },
+    {
+      'williamboman/mason-lspconfig.nvim',
+      version = 'v1.29.0',
+    },
+    'WhoIsSethDaniel/mason-tool-installer.nvim', -- no tagged versions
 
     -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim', opts = {} },
+    {
+      'j-hui/fidget.nvim',
+      version = 'v1.4.5',
+      opts = {},
+    },
 
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
-    { 'folke/neodev.nvim', opts = {} },
+    {
+      'folke/neodev.nvim',
+      version = 'v3.0.0', -- laster version, project deprecated
+      opts = {},
+    },
   },
   config = function()
     -- Brief aside: **What is LSP?**
