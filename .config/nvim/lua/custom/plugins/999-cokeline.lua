@@ -1,10 +1,10 @@
 return {
-  "willothy/nvim-cokeline",
+  'willothy/nvim-cokeline',
   version = 'v0.4.0',
   dependencies = {
-    "nvim-lua/plenary.nvim",        -- Required for v0.4.0+
-    "nvim-tree/nvim-web-devicons", -- If you want devicons
-    "stevearc/resession.nvim",       -- Optional, for persistent history
+    'nvim-lua/plenary.nvim', -- Required for v0.4.0+
+    'nvim-tree/nvim-web-devicons', -- If you want devicons
+    'stevearc/resession.nvim', -- Optional, for persistent history
   },
   opts = {
     buffers = {
@@ -13,17 +13,27 @@ return {
     },
     components = {
       {
-        text = function(buffer) return ' ' .. buffer.devicon.icon .. ' ' end,
+        text = function(buffer)
+          return ' ' .. buffer.devicon.icon .. ' '
+        end,
       },
       {
-        text = function(buffer) return buffer.number .. ': ' end,
+        text = function(buffer)
+          return buffer.number .. ': '
+        end,
       },
       {
-        text = function(buffer) return buffer.unique_prefix end,
+        text = function(buffer)
+          return buffer.unique_prefix
+        end,
       },
       {
-        text = function(buffer) return buffer.filename .. ' ' end,
-        italics = function(buffer) return buffer.is_focused end,
+        text = function(buffer)
+          return buffer.filename .. ' '
+        end,
+        italics = function(buffer)
+          return buffer.is_focused
+        end,
       },
     },
   },
