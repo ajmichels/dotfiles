@@ -11,11 +11,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
+    'davvid/telescope-git-grep.nvim', -- https://github.com/davvid/telescope-git-grep.nvim
     {
       'aaronhallaert/advanced-git-search.nvim',
       cmd = { 'AdvancedGitSearch' },
       keys = {
-        { '<leader>Gs', '<cmd>AdvancedGitSearch search_log_content<cr>', desc = '[G]it [S]earch' },
+        { '<leader>gs', '<cmd>AdvancedGitSearch search_log_content<cr>', desc = '[G]it [S]earch' },
       },
       dependencies = {
         -- to show diff splits and open commits in browser
@@ -100,6 +101,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'advanced_git_search')
+    pcall(require('telescope').load_extension, 'git_grep')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
@@ -113,6 +115,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+    vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it [f]iles' })
+    vim.keymap.set('n', '<leader>gg', '<cmd>Telescope git_grep<cr>', { desc = '[G]it [g]rep' })
+    vim.keymap.set('n', '<leader>g<leader>', '<cmd>Telescope git_grep grep<cr>', { desc = '[G]it grep under cursor' })
 
     -- Slightly advanced example of overriding default behavior and theme
     vim.keymap.set('n', '<leader>/', function()
