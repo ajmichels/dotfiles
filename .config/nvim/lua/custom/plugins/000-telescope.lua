@@ -4,16 +4,18 @@
 -- you do for a plugin at the top level, you can do for a dependency.
 --
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
+--
+-- https://github.com/nvim-telescope/telescope.nvim
 
 return { -- Fuzzy Finder (files, lsp, etc)
   'nvim-telescope/telescope.nvim',
   event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    'nvim-lua/plenary.nvim', -- ?is this really a dependency here?
     'davvid/telescope-git-grep.nvim', -- https://github.com/davvid/telescope-git-grep.nvim
     {
-      'aaronhallaert/advanced-git-search.nvim',
+      'aaronhallaert/advanced-git-search.nvim', -- https://github.com/aaronhallaert/advanced-git-search.nvim
       cmd = { 'AdvancedGitSearch' },
       keys = {
         { '<leader>gs', '<cmd>AdvancedGitSearch search_log_content<cr>', desc = '[G]it [S]earch' },
