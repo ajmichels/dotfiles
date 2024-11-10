@@ -1,4 +1,4 @@
-export PNPM_HOME="~/Library/pnpm"
+export PNPM_HOME=~/Library/pnpm
 
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
