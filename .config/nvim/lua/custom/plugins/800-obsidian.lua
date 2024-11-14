@@ -1,3 +1,6 @@
+-- Plugin providing functionality similar to Obsidian
+--
+-- See https://github.com/epwalsh/obsidian.nvim
 return {
   'epwalsh/obsidian.nvim',
   version = 'v3.9.0', -- recommended, use latest release instead of latest commit
