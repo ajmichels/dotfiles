@@ -1,0 +1,54 @@
+vim.o.textwidth = 100 -- automatically insert a line break after X characters
+
+vim.o.formatoptions = 'croqnB1jp'
+
+-- c    Auto-wrap comments using 'textwidth', inserting the current comment
+--     leader automatically.
+--                             *fo-r*
+-- r    Automatically insert the current comment leader after hitting
+--     <Enter> in Insert mode.
+--                             *fo-o*
+-- o    Automatically insert the current comment leader after hitting 'o' or
+--     'O' in Normal mode.  In case comment is unwanted in a specific place
+--     use CTRL-U to quickly delete it. |i_CTRL-U|
+--                             *fo-q*
+-- q    Allow formatting of comments with "gq".
+--     Note that formatting will not change blank lines or lines containing
+--     only the comment leader.  A new paragraph starts after such a line,
+--     or when the comment leader changes.
+--                             *fo-n*
+-- n    When formatting text, recognize numbered lists.  This actually uses
+--     the 'formatlistpat' option, thus any kind of list can be used.  The
+--     indent of the text after the number is used for the next line.  The
+--     default is to find a number, optionally followed by '.', ':', ')',
+--     ']' or '}'.  Note that 'autoindent' must be set too.  Doesn't work
+--     well together with "2".
+--     Example: >
+--         1. the first item
+--            wraps
+--         2. the second item
+--                             *fo-B*
+-- B    When joining lines, don't insert a space between two multibyte
+--     characters.  Overruled by the 'M' flag.
+--                             *fo-1*
+-- 1    Don't break a line after a one-letter word.  It's broken before it
+--     instead (if possible).
+--                             *fo-j*
+-- j    Where it makes sense, remove a comment leader when joining lines.  For
+--     example, joining:
+--         int i;   // the index ~
+--                  // in the list ~
+--     Becomes:
+--         int i;   // the index in the list ~
+--                             *fo-p*
+-- p    Don't break lines at single spaces that follow periods.  This is
+--     intended to complement 'joinspaces' and |cpo-J|, for prose with
+--     sentences separated by two spaces.  For example, with 'textwidth' set
+--     to 28: >
+--         Surely you're joking, Mr. Feynman!
+-- <    Becomes: >
+--         Surely you're joking,
+--         Mr. Feynman!
+-- <    Instead of: >
+--         Surely you're joking, Mr.
+--         Feynman!
