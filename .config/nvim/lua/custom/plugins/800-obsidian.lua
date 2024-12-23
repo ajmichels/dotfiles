@@ -37,7 +37,7 @@ return {
       function()
         local year = vim.fn.system [[date +'%Y-W' | tr -d '\n']]
         local week = tonumber(vim.fn.system [[date +'%U' | tr -d '\n']]) + 1
-        vim.cmd(':ObsidianNew' .. year .. week)
+        vim.cmd(':ObsidianNew Weekly Notes/' .. year .. week)
       end,
       desc = '[O]bsidian [W]eekly Note',
     },
@@ -82,6 +82,10 @@ return {
       vim.fn.jobstart { 'open', url } -- Mac OS
       -- vim.fn.jobstart({"xdg-open", url})  -- linux
     end,
+
+    -- create new notes in the root directory
+    notes_subdir = '.',
+    new_notes_location = 'notes_subdir',
 
     picker = {
       -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
