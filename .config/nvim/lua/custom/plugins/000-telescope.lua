@@ -12,10 +12,17 @@ return { -- Fuzzy Finder (files, lsp, etc)
   event = 'VimEnter',
   branch = '0.1.x',
   dependencies = {
-    'nvim-lua/plenary.nvim', -- ?is this really a dependency here?
-    'davvid/telescope-git-grep.nvim', -- https://github.com/davvid/telescope-git-grep.nvim
+    {
+      'nvim-lua/plenary.nvim', -- ?is this really a dependency here?
+      commit = '857c5ac',
+    },
+    {
+      'davvid/telescope-git-grep.nvim', -- https://github.com/davvid/telescope-git-grep.nvim
+      commit = 'a1adc59',
+    },
     {
       'aaronhallaert/advanced-git-search.nvim', -- https://github.com/aaronhallaert/advanced-git-search.nvim
+      commit = '69a41a3',
       cmd = { 'AdvancedGitSearch' },
       keys = {
         { '<leader>gs', '<cmd>AdvancedGitSearch search_log_content<cr>', desc = '[G]it [S]earch' },
@@ -27,17 +34,24 @@ return { -- Fuzzy Finder (files, lsp, etc)
           version = 'v3.7',
         },
 
-        -- to open commits in browser with fugitive
-        'tpope/vim-rhubarb', -- developer does not maintain tagged versions
+        {
+          -- to open commits in browser with fugitive
+          'tpope/vim-rhubarb', -- developer does not maintain tagged versions
+          commit = '386daa2',
+        },
 
         -- optional: to replace the diff from fugitive with diffview.nvim
         -- (fugitive is still needed to open in browser)
-        'sindrets/diffview.nvim', -- no tagged versions
+        {
+          'sindrets/diffview.nvim',
+          commit = '4516612',
+        },
       },
     },
     { -- If encountering errors, see telescope-fzf-native README for installation instructions
       'nvim-telescope/telescope-fzf-native.nvim',
       -- version = '', developer does not maintained tagged versions
+      commit = '1f08ed6',
 
       -- `build` is used to run some command when the plugin is installed/updated.
       -- This is only run then, not every time Neovim starts up.
@@ -52,10 +66,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     {
       'nvim-telescope/telescope-ui-select.nvim',
       -- version = '' developer does not maintain tagged versions
+      commit = '6e51d7d',
     },
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
-    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    {
+      'nvim-tree/nvim-web-devicons',
+      commit = 'c90dee4',
+      enabled = vim.g.have_nerd_font,
+    },
   },
   config = function()
     -- Telescope is a fuzzy finder that comes with a lot of different things that

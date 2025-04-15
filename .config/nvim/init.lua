@@ -125,7 +125,7 @@ require('lazy').setup({
   },
   {
     'christoomey/vim-tmux-navigator', -- making moving from vim in tmux to another pane easier
-    version = 'v1.0',
+    commit = '791dacf',
   },
 
   -- See `:help lazy.nvim-lazy.nvim-structuring-your-plugins`

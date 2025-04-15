@@ -1,10 +1,16 @@
 return {
   'willothy/nvim-cokeline',
-  version = 'v0.4.0',
+  commit = '1e9faa6',
   dependencies = {
     'nvim-lua/plenary.nvim', -- Required for v0.4.0+
-    'nvim-tree/nvim-web-devicons', -- If you want devicons
-    'stevearc/resession.nvim', -- Optional, for persistent history
+    {
+      'nvim-tree/nvim-web-devicons', -- If you want devicons
+      commit = 'c90dee4',
+    },
+    {
+      'stevearc/resession.nvim', -- Optional, for persistent history
+      commit = 'fd08e47',
+    },
   },
   opts = {
     buffers = {

@@ -1,26 +1,29 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  version = 'v0.1.8',
+  version = 'v2.0.0',
   dependencies = {
 
     -- Automatically install LSPs and related tools to stdpath for Neovim
     -- NOTE: Must be loaded before dependants
     {
       'williamboman/mason.nvim',
-      version = 'v1.10.0',
+      version = 'v1.11.0',
       config = true,
     },
     {
       'williamboman/mason-lspconfig.nvim',
-      version = 'v1.29.0',
+      version = 'v1.32.0',
     },
-    'WhoIsSethDaniel/mason-tool-installer.nvim', -- no tagged versions
+    {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      commit = '1255518',
+    },
 
     -- Useful status updates for LSP.
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     {
       'j-hui/fidget.nvim',
-      version = 'v1.4.5',
+      version = 'v1.6.1',
       opts = {},
     },
 

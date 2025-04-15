@@ -17,7 +17,7 @@
 
 return { -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
-  version = 'v3.13.3',
+  version = 'v3.17.0',
   event = 'VimEnter',
   opts = {
     delay = 500,

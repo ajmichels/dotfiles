@@ -1,7 +1,13 @@
 return {
   'nvim-lualine/lualine.nvim',
   -- version = '', The author of this plugin doesn't seem to release tagged versions
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  commit = '86fe395',
+  dependencies = {
+    {
+      'nvim-tree/nvim-web-devicons',
+      commit = 'c90dee4',
+    },
+  },
   opts = {
     theme = 'gruvbox_dark',
   },

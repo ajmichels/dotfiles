@@ -1,6 +1,6 @@
 return { -- Autocompletion
   'hrsh7th/nvim-cmp',
-  version = 'v0.0.1',
+  version = 'v0.0.2',
   event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
@@ -28,13 +28,22 @@ return { -- Autocompletion
         -- },
       },
     },
-    'saadparwaiz1/cmp_luasnip', -- developer does not maintain tagged versions
+    {
+      'saadparwaiz1/cmp_luasnip', -- developer does not maintain tagged versions
+      commit = '98d9cb5',
+    },
 
     -- Adds other completion capabilities.
     --  nvim-cmp does not ship with all sources by default. They are split
     --  into multiple repos for maintenance purposes.
-    'hrsh7th/cmp-nvim-lsp', -- no tagged versions
-    'hrsh7th/cmp-path',
+    {
+      'hrsh7th/cmp-nvim-lsp',
+      commit = 'a8912b8',
+    },
+    {
+      'hrsh7th/cmp-path',
+      commit = 'c6635aa',
+    },
   },
   config = function()
     -- See `:help cmp`
