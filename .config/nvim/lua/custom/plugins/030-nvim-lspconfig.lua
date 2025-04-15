@@ -203,7 +203,7 @@ return { -- LSP Configuration & Plugins
       },
 
       -- TypeScript Language Service configuration
-      tsserver = {
+      ts_ls = {
         settings = {
           diagnostics = {
             ignoredCodes = {
