@@ -14,5 +14,6 @@ return {
     'sass',
     'css',
     'lua',
+    'php',
   },
 }
