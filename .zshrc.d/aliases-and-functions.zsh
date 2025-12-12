@@ -47,3 +47,7 @@ function prompt_tmux_check() {
         p10k segment -f blue -t "tmux"
     fi
 }
+
+function rand() {
+    echo $RANDOM$RANDOM$RANDOM
+}
