@@ -1,5 +1,7 @@
-# Set Homebrew environment variables (only once)
-if [[ $SHLVL == 1 ]]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
+if [[ $(uname) == "Darwin" ]]; then
+    # Set Homebrew environment variables (only once)
+    if [[ $SHLVL == 1 ]]; then eval "$(/opt/homebrew/bin/brew shellenv)"; fi
+fi
 
 export XDG_CONFIG_HOME=~/.config
 export EDITOR=vim # set vim as the default editor

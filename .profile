@@ -1,5 +1,8 @@
 export PATH="$HOME/bin:$PATH"
-export PATH="${HOMEBREW_PREFIX}/opt/openssl/bin:$PATH"
+
+if [[ $(uname) == "Darwin" ]]; then
+    export PATH="${HOMEBREW_PREFIX}/opt/openssl/bin:$PATH"
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
