@@ -17,6 +17,8 @@ if type "eza" > /dev/null; then
     alias ls='eza -l --git --icons'
     alias tree='eza -l --tree --git --icons -I node_modules\|coverage\|vendor\|build\|dist'
     alias watch-tree='watch -c "eza -l --git --tree --icons --color=always $*"'
+else
+    alias ls='ls -l --color=auto'
 fi
 
 if [[ $TERM == "xterm-kitty" ]]; then
