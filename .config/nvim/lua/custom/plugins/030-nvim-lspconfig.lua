@@ -226,11 +226,14 @@ return { -- LSP Configuration & Plugins
         end,
       },
 
+      gopls = {},
+
       commitlint = {},
       --yamllint = {},
       markdownlint = {},
       jsonlint = {},
       vacuum = {},
+      curlylint = {},
 
       dockerls = {}, -- Dockerfiles
       docker_compose_language_service = {}, -- Docker Compose files
