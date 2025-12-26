@@ -1,5 +1,4 @@
 # custom aliases
-alias ls='eza -l --git --icons'
 alias cat=bat
 alias less='bat --pager=less'
 alias fgrep='fgrep -n --color=always';
@@ -12,8 +11,13 @@ alias mvim='mvim -v'
 alias vim='nvim'
 alias decolorize='sed "s/\x1B\[[0-9;]\{1,\}[A-Za-z]//g"'
 alias mdfind='mdfind -onlyin "$PWD"'
-alias tree='eza -l --tree --git --icons -I node_modules\|coverage\|vendor\|build\|dist'
-alias watch-tree='watch -c "eza -l --git --tree --icons --color=always $*"'
+
+if type "eza" > /dev/null; then
+    # eza not available in some environments (eg. old Raspberry PI OS)
+    alias ls='eza -l --git --icons'
+    alias tree='eza -l --tree --git --icons -I node_modules\|coverage\|vendor\|build\|dist'
+    alias watch-tree='watch -c "eza -l --git --tree --icons --color=always $*"'
+fi
 
 # print terminal colors
 alias show-colors='for x in {0..8}; do for i in {30..37}; do for a in {40..47}; do echo -ne "\e[$x;$i;$a""m\\\e[$x;$i;$a""m\e[0;37;40m "; done; echo; done; done; echo ""'
