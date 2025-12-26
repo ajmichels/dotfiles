@@ -41,3 +41,5 @@
     process = git-lfs filter-process
 [commit]
     gpgsign = true
+[include]
+    path = ~/.gitconfig.d/debian.gitconfig
