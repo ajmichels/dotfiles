@@ -14,8 +14,8 @@ path=($path $HOME/.rvm/bin) # Add RVM to PATH for scripting
 path=($HOME/bin $path .)
 
 # load other files (including machine specific ones)
-if [[ -d ~/.zshenv.d ]]; then
-    for file in ~/.zshenv.d/*; do
+if [[ -d ~/.zshenv.d && -n ~/.zshenv.d/*([^.]*)(.|^/)(#qN) ]]; then
+    for file in ~/.zshenv.d/*(.N); do
         source "$file"
     done
 fi
