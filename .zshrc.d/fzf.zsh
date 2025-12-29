@@ -4,7 +4,9 @@
 # Initialize fzf - fuzzy finder
 # - set up key bindings
 # - set up completion
-eval "$(fzf --zsh)"
+if ! type "dpkg" > /dev/null || dpkg --compare-versions "$(dpkg-query -f '${Version}' -W fzf)" ge "0.48.0"; then
+    eval "$(fzf --zsh)"
+fi
 
 # Use `fd` as the default command
 # include hidden files, exclude file in .git dir, and file that match .gitignore patters
