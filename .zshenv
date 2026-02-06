@@ -12,8 +12,7 @@ export GPG_TTY=$(tty)
 
 # update PATH but avoid duplicates (.zshenv issue)
 typeset -U path
-path=($path $HOME/.rvm/bin) # Add RVM to PATH for scripting
-path=($HOME/bin $path .)
+path=($HOME/bin $path)
 
 # load other files (including machine specific ones)
 if [[ -d ~/.zshenv.d && -n ~/.zshenv.d/*([^.]*)(.|^/)(#qN) ]]; then
