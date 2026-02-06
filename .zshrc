@@ -27,14 +27,15 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Zinit packages
+# Zinit packages - load powerlevel right away, then everything else
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-# zinit light jeffreytse/zsh-vi-mode
+zinit wait'0' lucid light-mode for \
+    zsh-users/zsh-syntax-highlighting \
+    zsh-users/zsh-completions \
+    zsh-users/zsh-autosuggestions \
+    Aloxaf/fzf-tab \
+    # zinit light jeffreytse/zsh-vi-mode
 
 # Load completions
 autoload -U compinit && compinit
