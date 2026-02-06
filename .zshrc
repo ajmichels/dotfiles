@@ -1,3 +1,8 @@
+# REMINDER
+#
+# `.zshrc' is sourced in interactive shells. It should contain commands to set
+# up aliases, functions, options, key bindings, etc.
+
 export PATH="/opt/homebrew/bin:$PATH"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
