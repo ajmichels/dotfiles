@@ -66,5 +66,3 @@ if [[ ! -d $XDG_CONFIG_HOME/tmux/plugins/tpm ]]; then
     git clone https://github.com/tmux-plugins/tpm $XDG_CONFIG_HOME/tmux/plugins/tpm
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.zshrc.d/p10k.zsh.
-[[ ! -f ~/.zshrc.d/p10k.zsh ]] || source ~/.zshrc.d/p10k.zsh
