@@ -27,11 +27,6 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
-# NVM options
-export NVM_AUTO_USE=true # automatically switch node versions based on .nvmrc files
-export NVM_COMPLETION=true # load zsh auto-completions for NVM
-# export NVM_LAZY_LOAD=true # NOTE: this doesn't seem to work correctly
-
 # Zinit packages
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
