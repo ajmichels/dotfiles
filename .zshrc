@@ -3,6 +3,13 @@
 # `.zshrc' is sourced in interactive shells. It should contain commands to set
 # up aliases, functions, options, key bindings, etc.
 
+# Disabling global RC files for ZSH on MacOS
+# I found that the /etc/zprofile file is running MacOS specific path_helper
+# which is adding paths but also reorder the paths that already exist.
+# But I still want to run /etc/zshrc
+if [[ $(uname) == "Darwin" ]]; then
+    source /etc/zshrc
+fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

@@ -20,3 +20,17 @@ if [[ -d ~/.zshenv.d && -n ~/.zshenv.d/*([^.]*)(.|^/)(#qN) ]]; then
         source "$file"
     done
 fi
+
+# Disabling global RC files for ZSH on MacOS
+# I found that the /etc/zprofile file is running MacOS specific path_helper
+# which is adding the following paths but also reorder the paths that already
+# exist
+if [[ $(uname) == "Darwin" ]]; then
+    setopt no_global_rcs
+    path=($path /usr/local/bin)
+    # Not really sure what these are but they look important...
+    path=($path /System/Cryptexes/App/usr/bin)
+    path=($path /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin)
+    path=($path /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin)
+    path=($path /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin)
+fi
