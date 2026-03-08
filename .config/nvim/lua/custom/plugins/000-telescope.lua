@@ -138,6 +138,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>gf', builtin.git_files, { desc = '[G]it [f]iles' })
     vim.keymap.set('n', '<leader>gg', '<cmd>Telescope git_grep<cr>', { desc = '[G]it [g]rep' })
+    vim.keymap.set('n', '<leader>gt', '<cmd>Telescope git_status<cr>', { desc = '[G]it s[t]atus' })
     vim.keymap.set('n', '<leader>g<leader>', '<cmd>Telescope git_grep grep<cr>', { desc = '[G]it grep under cursor' })
 
     -- Slightly advanced example of overriding default behavior and theme
