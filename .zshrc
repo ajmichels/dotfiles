@@ -55,7 +55,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 
 # Initialize zoxide - a better cd command
-eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init --cmd zd zsh)"
 
 # Run RVM so that we can automatically switch Ruby versions
 if [[ -f ~/.rvm/scripts/rvm ]]; then
