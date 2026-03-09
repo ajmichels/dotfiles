@@ -213,6 +213,10 @@ return { -- LSP Configuration & Plugins
       },
 
       eslint = {
+        settings = {
+          debug = true,
+          nodePath = vim.env.PNPM_HOME .. '/global/5/node_modules',
+        },
         flags = { debounce_text_changes = 500 },
         on_attach = function(client)
           local au_lsp = vim.api.nvim_create_augroup('eslint_lsp', { clear = true })
@@ -226,15 +230,13 @@ return { -- LSP Configuration & Plugins
         end,
       },
 
-      gopls = {},
-
-      commitlint = {},
-      --yamllint = {},
-      markdownlint = {},
+      gopls = {}, -- Go lang files
+      commitlint = {}, -- Conventional Commits - Git Commit Messages
+      markdownlint = {}, -- Markdown files
       jsonlint = {},
       vacuum = {},
-      curlylint = {},
-
+      curlylint = {}, -- Curl commands
+      gitlab_ci_ls = {}, -- GitLab CI Files
       dockerls = {}, -- Dockerfiles
       docker_compose_language_service = {}, -- Docker Compose files
     }
