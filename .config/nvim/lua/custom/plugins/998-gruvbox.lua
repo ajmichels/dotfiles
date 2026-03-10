@@ -1,3 +1,6 @@
+-- Plugin to provide GruvBox theme colors
+--
+-- See https://github.com/ellisonleao/gruvbox.nvim
 return {
   {
     -- Gruvbox Colorscheme
@@ -29,6 +32,7 @@ return {
       overrides = {
         SignColumn = { bg = '#282828' },
         TabLineFill = { bg = '#282828', fg = '#a89984' },
+        ErrorMsg = { bg = 'none', fg = '#e15e4e' },
       },
     },
     init = function()
