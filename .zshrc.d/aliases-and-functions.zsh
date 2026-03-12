@@ -12,6 +12,7 @@ alias vim='nvim'
 alias decolorize='sed "s/\x1B\[[0-9;]\{1,\}[A-Za-z]//g"'
 alias mdfind='mdfind -onlyin "$PWD"'
 alias mypath='tr ":" "\n" <<< $PATH'
+alias reload='exec zsh -l'
 
 if type "eza" > /dev/null; then
     # eza not available in some environments (eg. old Raspberry PI OS)
