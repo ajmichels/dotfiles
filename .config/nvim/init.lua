@@ -25,14 +25,15 @@ vim.g.have_nerd_font = true
 
 vim.opt.spelllang = 'en_us' -- set spelling language
 vim.opt.number = true -- Make line numbers default
--- vim.opt.relativenumber = true -- relative line numbers
+vim.opt.relativenumber = true -- relative line numbers
+vim.opt.signcolumn = 'yes' -- Keep signcolumn (gutter on the left) on by default
+vim.opt.statuscolumn = '%s %{v:lnum} %=%{v:relnum} ' -- show relative and normal line numbers (sign, line, relative line)
 vim.opt.showmode = false -- Don't show the mode, since it's already in the status line
 -- vim.opt.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim. See `:help clipboard`
 vim.opt.breakindent = true -- Enable break indent
 vim.opt.undofile = true -- Save undo history (even when exiting vim)
 vim.opt.ignorecase = true -- Case-insensitive searching
 vim.opt.smartcase = true -- UNLESS \C or one or more capital letters in the search term
-vim.opt.signcolumn = 'yes' -- Keep signcolumn (gutter on the left) on by default
 vim.opt.updatetime = 250 -- Decrease update time
 vim.opt.timeoutlen = 300 -- Decrease mapped sequence wait time (i.e. Displays which-key popup sooner)
 vim.opt.splitright = true -- new vsplits created to the right of current window
