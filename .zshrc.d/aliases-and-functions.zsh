@@ -42,24 +42,68 @@ md () { mkdir -p "$@" && cd "$@"; }
 # Change to directory then list contents
 cl () { cd $* && ls; }
 
+rand() {
+    local help
+    local verbose
+    local min=("0")
+    local max=("9999999999999999")
+    local usage=(
+        "rand - returns a random integer"
+        "  -h,--help - shows this message"
+        "  -v,--verbose - print additional info to stderr"
+        "  -n,--min - minimum value. Defaults to $min"
+        "  -x,--max - maximum value. Defaults to $max"
+        " "
+        "NOTE: This function depends on the jr utility."
+    )
+
+    zparseopts -F -K -- \
+        {h,-help}=help \
+        {v,-verbose}=verbose \
+        {n,-min}:=min \
+        {x,-max}:=max ||
+        return 1
+
+    [[ ! -z "$help" ]] && print -l $usage && return
+
+    if [[ ! -z "$verbose" ]]; then
+        print -u2 "Min: $min[-1], Max: $max[-1]"
+    fi
+
+    echo $(jr template run --embedded "{{integer $min[-1] $max[-1]}}" 2> /dev/null)
+}
+
+# Provide an indicator of how nested the current prompt is inside of the shell
+# This is for the Powerlevel10k Prompt extension
 function prompt_zsh_shell_level() {
+    local level=$SHLVL
+
     if [[ -n "$TMUX" ]]; then
         level=$(($SHLVL - 1))
-        #promptPrefix='tmux'
-    else
-        level=$SHLVL
-        #promptPrefix='%n@%M'
     fi
 
     p10k segment -f yellow -t "s${level}"
 }
 
+# Check if the current prompt is running inside of tmux
+# This is for the Powerlevel10k Prompt extension
 function prompt_tmux_check() {
     if [[ -n "$TMUX" ]]; then
         p10k segment -f blue -t "tmux"
     fi
 }
 
-function rand() {
-    echo $RANDOM$RANDOM$RANDOM
+# Traverses up the tree to see if the current directory is inside of an NVM context
+# This is for the Powerlevel10k Prompt extension
+function prompt_my_nvm() {
+    local NVMRC=".nvmrc"
+    local DIR=$(pwd)
+    while [[ "$DIR" != "/" && ! -f "$DIR/$NVMRC" ]]; do
+        DIR=$(dirname "$DIR")
+    done
+
+    if [[ -f "$DIR/$NVMRC" ]]; then
+        local NODE_VERSION=$(nvm current);
+        [[ -n "$NODE_VERSION" ]] && p10k segment -f yellow -t "$NODE_VERSION";
+    fi
 }

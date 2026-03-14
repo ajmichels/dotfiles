@@ -66,7 +66,7 @@
     zsh_shell_level
     command_execution_time    # previous command duration
     virtualenv                # python virtual environment
-    nvm                       # show nvm version number
+    my_nvm                    # show nvm version number
     aws                       # show current AWS profile
     context                   # user@host
     # time                    # current time
@@ -106,6 +106,8 @@
 
   # NVM version
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=6
+  # don't show node version if it is "system" version
+  typeset -g POWERLEVEL9K_NVM_SHOW_SYSTEM=false
 
   # Blue current directory.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
