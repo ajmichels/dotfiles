@@ -6,7 +6,7 @@
 # commands that produce output or assume the shell is attached to a tty.
 
 export XDG_CONFIG_HOME=~/.config
-export EDITOR=vim # set vim as the default editor
+export EDITOR=nvim # set vim as the default editor
 export AWS_SDK_JS_SUPPRESS_MAINTENANCE_MODE_MESSAGE=1 # disable AWS SDK v3 warning
 export GPG_TTY=$(tty)
 
