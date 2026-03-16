@@ -15,5 +15,6 @@ return {
     'css',
     'lua',
     'php',
+    'markdown',
   },
 }
