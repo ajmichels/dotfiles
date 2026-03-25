@@ -107,3 +107,9 @@ function prompt_my_nvm() {
         [[ -n "$NODE_VERSION" ]] && p10k segment -f yellow -t "$NODE_VERSION";
     fi
 }
+
+# Input a URL and follow that URL through all of its redirects and output the final URL
+function resolve-url() {
+    local url="${1:-$(cat)}"
+    curl -Ls -o /dev/null -w '%{url_effective}' "$url"
+}
