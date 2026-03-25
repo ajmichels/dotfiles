@@ -124,9 +124,12 @@ require('lazy').setup({
     'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
     version = 'v2.0',
   },
+  -- {
+  --   'christoomey/vim-tmux-navigator', -- making moving from vim in tmux to another pane easier
+  --   commit = '791dacf',
+  -- },
   {
-    'christoomey/vim-tmux-navigator', -- making moving from vim in tmux to another pane easier
-    commit = '791dacf',
+    'knubie/vim-kitty-navigator', -- makes moving from vim in kitty windows easier
   },
 
   -- See `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
