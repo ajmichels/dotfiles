@@ -43,7 +43,18 @@ return {
     },
   },
   opts = {
-    disable_frontmatter = false,
+    -- UPDATED: Disable frontmatter for files in .claude/ OR named CLAUDE.md
+    disable_frontmatter = function(fname)
+      if fname then
+        local is_claude_dir = string.find(fname, '%.claude') ~= nil
+        local is_claude_file = string.find(fname, 'CLAUDE%.md$') ~= nil
+
+        if is_claude_dir or is_claude_file then
+          return true
+        end
+      end
+      return false
+    end,
 
     -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
     completion = {
