@@ -1,0 +1,19 @@
+#!/bin/zsh
+# sleepwatcher hook (invoked via ~/.sleep symlink): if a recording is active
+# in a Neovim instance, stop it cleanly (finalizing ffmpeg) before the system
+# suspends. No-ops silently if nothing is recording, nvim isn't reachable, or
+# anything else is off -- this is purely optional; the core recording flow in
+# NeoVim doesn't depend on sleepwatcher being installed at all.
+
+ADDR_FILE="$HOME/.cache/record-meeting-nvim-addr"
+NVIM_BIN="/opt/homebrew/bin/nvim"
+
+[ -f "$ADDR_FILE" ] || exit 0
+[ -x "$NVIM_BIN" ] || exit 0
+
+ADDR=$(cat "$ADDR_FILE" 2>/dev/null)
+[ -n "$ADDR" ] || exit 0
+
+"$NVIM_BIN" --server "$ADDR" --remote-send ':RecordMeetingStop<CR>' >/dev/null 2>&1
+
+exit 0
