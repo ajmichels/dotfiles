@@ -113,3 +113,9 @@ function resolve-url() {
     local url="${1:-$(cat)}"
     curl -Ls -o /dev/null -w '%{url_effective}' "$url"
 }
+
+# Take markdown input and turn it into html in clipboard for pasting in chats
+function md2html() {
+    hex=$(cat | pandoc -f gfm -t html | hexdump -ve '1/1 "%.2x"')
+    osascript -e "set the clipboard to «data HTML${hex}»"
+}
