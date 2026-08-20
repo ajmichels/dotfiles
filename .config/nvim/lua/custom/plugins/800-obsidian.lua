@@ -110,6 +110,20 @@ return {
         insert_link = '<C-l>',
       },
     },
+
+    checkbox = {
+      order = { ' ', '/', 'x', '-', '!' },
+    },
+
+    ui = {
+      checkboxes = {
+        [' '] = { order = 1, char = '󰄱', hl_group = 'ObsidianTodo' },
+        ['/'] = { order = 3, char = '', hl_group = 'ObsidianRightArrow' },
+        ['x'] = { order = 2, char = '', hl_group = 'ObsidianDone' },
+        ['-'] = { order = 4, char = '', hl_group = 'ObsidianTilde' },
+        ['!'] = { order = 5, char = '', hl_group = 'ObsidianImportant' },
+      },
+    },
   },
   config = function(_, opts)
     local localConfig = require 'local.obsidian'
