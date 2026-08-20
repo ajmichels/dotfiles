@@ -163,5 +163,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sn', function()
       builtin.find_files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
+
+    -- Telescope pickers backed by the `mnotes` CLI -- see lua/custom/mnotes.lua.
+    -- Registered here (rather than as a separate lazy.nvim plugin spec) so it loads
+    -- after telescope.nvim itself is guaranteed to be on the runtimepath.
+    require('custom.mnotes').setup()
   end,
 }

@@ -32,6 +32,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>w', group = '[W]orkspace' },
       { '<leader>t', group = '[T]oggle' },
       { '<leader>o', group = '[O]bsidian' },
+      { '<leader>n', group = '[N]otes (mnotes)' },
       { '<leader>g', group = '[G]it' },
     },
   },
