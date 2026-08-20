@@ -80,10 +80,13 @@ start/stop still works exactly as described above.
 COMMANDS / KEYMAPS
 ==================
 
-  :RecordMeetingStart [name]   <leader>ms   start recording
-  :RecordMeetingStop           <leader>me   stop, transcribe, append notes
-  :RecordMeetingFormat [fmt]                get/set format (wav|m4a), no
-                                             arg reports the current format
+  :RecordMeetingStart [name]     <leader>ms   start recording
+  :RecordMeetingStop             <leader>me   stop, transcribe, append notes
+  :RecordMeetingReprocess <path>              re-run transcribe+format+append
+                                               on an existing recording file
+                                               (e.g. after a pipeline failure)
+  :RecordMeetingFormat [fmt]                  get/set format (wav|m4a), no
+                                               arg reports the current format
 
 Only one recording can be active at a time (tracked via `state.job_id`).
 
@@ -151,15 +154,22 @@ local FORMAT_PROMPT = [[
 You are formatting a raw speaker-labeled meeting transcript into concise meeting notes for an Obsidian vault.
 
 Rules:
-- The transcript's speaker labels (Speaker 1, Speaker 2, ...) may be wrong: the diarization model sometimes splits one speaker into two labels, or merges two speakers into one. Re-read the dialogue and merge/split labels where the content makes it obvious (consistent phrasing, self-references, replies to a question the same person just asked).
-- You do not know real names. Keep corrected labels as "Speaker 1", "Speaker 2", etc. Do not guess real names.
+- The transcript's speaker labels (Speaker 1, Speaker 2, ...) may be wrong: the diarization model
+  sometimes splits one speaker into two labels, or merges two speakers into one. Re-read the
+  dialogue and merge/split labels where the content makes it obvious (consistent phrasing,
+  self-references, replies to a question the same person just asked).
+- You do not know real names. Keep corrected labels as "Speaker 1", "Speaker 2", etc. Do not guess
+  real names.
 - Output ONLY markdown in this exact structure, nothing else, no preamble, no code fences:
 
-## Meetings Summary
+```markdown
+## Claude Meetings Summary
 
-**Topics Heading**
+### Topics Heading
 
 - concise bullets covering what was discussed, decisions made, and action items
+  * sub-bullets when appropriate
+```
 ]]
 
 -- Writes the final notes to the system clipboard (always, as a fallback)
@@ -275,6 +285,31 @@ local function transcribe(outfile, bufnr)
     vim.notify('Failed to start macparakeet-cli', vim.log.levels.ERROR)
     vim.fn.delete(workdir, 'rf')
   end
+end
+
+-- Reprocesses an already-recorded file that never made it through
+-- transcribe/format (e.g. a crash or a manual stop before the pipeline
+-- could run). Takes the same path through transcribe() -> format_with_claude()
+-- as a normal M.stop(), just without touching any recording state -- there's
+-- no ffmpeg job, timers, or caffeinate/servername bookkeeping to unwind.
+-- Notes land in whatever buffer is current when this is invoked.
+function M.reprocess(path)
+  if not path or path == '' then
+    vim.notify('Usage: :RecordMeetingReprocess <path-to-recording>', vim.log.levels.ERROR)
+    return
+  end
+
+  local outfile = vim.fn.expand(path)
+  if vim.fn.filereadable(outfile) == 0 then
+    vim.notify('File not found: ' .. outfile, vim.log.levels.ERROR)
+    return
+  end
+
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  vim.notify('Reprocessing ' .. outfile .. ' ...')
+
+  transcribe(outfile, bufnr)
 end
 
 -- Starts recording. Refuses to start a second recording on top of one
@@ -418,6 +453,14 @@ function M.setup(opts)
   vim.api.nvim_create_user_command('RecordMeetingStop', function()
     M.stop()
   end, { desc = 'Stop recording and append transcribed notes' })
+
+  vim.api.nvim_create_user_command('RecordMeetingReprocess', function(cmd_opts)
+    M.reprocess(cmd_opts.args)
+  end, {
+    nargs = 1,
+    complete = 'file',
+    desc = 'Reprocess an existing recording (transcribe + format + append)',
+  })
 
   -- With no argument, reports the current format; otherwise switches it for
   -- the next recording (does not affect one already in progress).
