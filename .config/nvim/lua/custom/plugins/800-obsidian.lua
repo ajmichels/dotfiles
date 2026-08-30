@@ -85,6 +85,30 @@ return {
       return tostring(os.time()) .. '-' .. suffix
     end,
 
+    -- Stamp every note with a system-managed `created` frontmatter field, matching the ISO 8601
+    -- UTC timestamp moneta-notes' core/notes.js writes on note creation (see docs/specs/S003-notes.md).
+    -- Replicates obsidian.nvim's default frontmatter (id, aliases, tags, then any other metadata) and
+    -- only fills in `created` when the note's file doesn't exist on disk yet — i.e. this really is a
+    -- creation, not just any save where the field happens to be missing. This func runs on every
+    -- save (first and subsequent), and plenty of pre-existing notes have no `created` key at all;
+    -- checking "does metadata.created exist" instead of "does the file exist" would stamp today's
+    -- date onto one of those the next time it's merely edited, fabricating a false creation time.
+    ---@param note obsidian.Note
+    ---@return table
+    note_frontmatter_func = function(note)
+      local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+      local is_new_note = note.path == nil or not note.path:is_file()
+      if out.created == nil and is_new_note then
+        out.created = os.date '!%Y-%m-%dT%H:%M:%SZ'
+      end
+      return out
+    end,
+
     -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
     -- URL it will be ignored but you can customize this behavior here.
     ---@param url string
