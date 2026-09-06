@@ -119,3 +119,9 @@ function md2html() {
     hex=$(cat | pandoc -f gfm -t html | hexdump -ve '1/1 "%.2x"')
     osascript -e "set the clipboard to «data HTML${hex}»"
 }
+
+# Take a streaming video URL and download the video locally
+function dl_video() {
+    local DATE=$(date +%Y%m%d%H%M%S)
+    ffmpeg -i "$1" -c copy "~/Downloads/video-${DATE}.mp4"
+}
