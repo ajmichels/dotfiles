@@ -1,9 +1,9 @@
 -- Plugin providing functionality similar to Obsidian
 --
--- See https://github.com/epwalsh/obsidian.nvim
+-- See https://github.com/obsidian-nvim/obsidian.nvim (community-maintained fork of epwalsh/obsidian.nvim)
 return {
-  'epwalsh/obsidian.nvim',
-  version = 'v3.9.0', -- recommended, use latest release instead of latest commit
+  'obsidian-nvim/obsidian.nvim',
+  version = 'v3.16.7', -- recommended, use latest release instead of latest commit
   lazy = true,
   ft = 'markdown',
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -20,46 +20,74 @@ return {
     'nvim-treesitter', -- optional
   },
   keys = {
-    { '<leader>os', '<cmd>ObsidianSearch<cr>', desc = '[O]bsidian [S]earch' },
-    { '<leader>oq', '<cmd>ObsidianQuickSwitch<cr>', desc = '[O]bsidian [Q]uick Switch' },
-    { '<leader>on', ':ObsidianNew', desc = '[O]bsidian [N]ew Note' },
-    { '<leader>ob', '<cmd>ObsidianBacklinks<cr>', desc = '[O]bsidian [B]acklinks' },
-    { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = '[O]bsidian [T]ags' },
-    { '<leader>od', '<cmd>ObsidianDailies<cr>', desc = '[O]bsidian [D]ailies' },
-    { '<leader>ol', ':ObsidianLink', mode = { 'v' }, desc = '[O]bsidian [L]ink' },
-    { '<leader>or', ':ObsidianRename', desc = '[O]bsidian [R]ename' },
-    { '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = '[O]bsidian [O]pen' },
-    { '<leader>op', ':ObsidianPasteImg', desc = '[O]bsidian [P]aste Image' },
-    { '<leader>oW', '<cmd>ObsidianWorkspace<cr>', desc = '[O]bsidian [W]orkspace' },
-    { '<leader>oT', '<cmd>ObsidianTemplate<cr>', desc = '[O]bsidian [T]emplate' },
+    { '<leader>os', '<cmd>Obsidian search<cr>', desc = '[O]bsidian [S]earch' },
+    { '<leader>oq', '<cmd>Obsidian quick_switch<cr>', desc = '[O]bsidian [Q]uick Switch' },
+    { '<leader>on', ':Obsidian new', desc = '[O]bsidian [N]ew Note' },
+    { '<leader>ob', '<cmd>Obsidian backlinks<cr>', desc = '[O]bsidian [B]acklinks' },
+    { '<leader>ot', '<cmd>Obsidian tags<cr>', desc = '[O]bsidian [T]ags' },
+    { '<leader>od', '<cmd>Obsidian dailies<cr>', desc = '[O]bsidian [D]ailies' },
+    { '<leader>ol', ':Obsidian link', mode = { 'v' }, desc = '[O]bsidian [L]ink' },
+    { '<leader>or', ':Obsidian rename', desc = '[O]bsidian [R]ename' },
+    { '<leader>oo', '<cmd>Obsidian open<cr>', desc = '[O]bsidian [O]pen' },
+    { '<leader>op', ':Obsidian paste_img', desc = '[O]bsidian [P]aste Image' },
+    { '<leader>oW', '<cmd>Obsidian workspace<cr>', desc = '[O]bsidian [W]orkspace' },
+    { '<leader>oT', '<cmd>Obsidian template<cr>', desc = '[O]bsidian [T]emplate' },
     {
       '<leader>ow',
       function()
         local year = vim.fn.system [[date +'%Y-W' | tr -d '\n']]
         local week = tonumber(vim.fn.system [[date +'%U' | tr -d '\n']]) + 1
-        vim.cmd(':ObsidianNew Weekly Notes/' .. year .. week)
+        vim.cmd(':Obsidian new Weekly Notes/' .. year .. week)
       end,
       desc = '[O]bsidian [W]eekly Note',
     },
   },
   opts = {
-    -- UPDATED: Disable frontmatter for files in .claude/ OR named CLAUDE.md
-    disable_frontmatter = function(fname)
-      if fname then
-        local is_claude_dir = string.find(fname, '%.claude') ~= nil
-        local is_claude_file = string.find(fname, 'CLAUDE%.md$') ~= nil
+    legacy_commands = false,
 
-        if is_claude_dir or is_claude_file then
-          return true
+    frontmatter = {
+      -- UPDATED: Disable frontmatter for files in .claude/ OR named CLAUDE.md
+      enabled = function(fname)
+        if fname then
+          local is_claude_dir = string.find(fname, '%.claude') ~= nil
+          local is_claude_file = string.find(fname, 'CLAUDE%.md$') ~= nil
+
+          if is_claude_dir or is_claude_file then
+            return false
+          end
         end
-      end
-      return false
-    end,
+        return true
+      end,
 
-    -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
+      -- Stamp every note with a system-managed `created` frontmatter field, matching the ISO 8601
+      -- UTC timestamp moneta-notes' core/notes.js writes on note creation (see docs/specs/S003-notes.md).
+      -- Replicates obsidian.nvim's default frontmatter (id, aliases, tags, then any other metadata) and
+      -- only fills in `created` when the note's file doesn't exist on disk yet — i.e. this really is a
+      -- creation, not just any save where the field happens to be missing. This func runs on every
+      -- save (first and subsequent), and plenty of pre-existing notes have no `created` key at all;
+      -- checking "does metadata.created exist" instead of "does the file exist" would stamp today's
+      -- date onto one of those the next time it's merely edited, fabricating a false creation time.
+      ---@param note obsidian.Note
+      ---@return table
+      func = function(note)
+        local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+          for k, v in pairs(note.metadata) do
+            out[k] = v
+          end
+        end
+        local is_new_note = note.path == nil or not note.path:is_file()
+        if out.created == nil and is_new_note then
+          out.created = os.date '!%Y-%m-%dT%H:%M:%SZ'
+        end
+        return out
+      end,
+    },
+
+    -- Optional, completion of wiki links, local markdown links, and tags.
+    -- Now provided via obsidian.nvim's built-in LSP server (obsidian-ls), picked up
+    -- automatically through the existing nvim_lsp cmp source.
     completion = {
-      -- Set to false to disable completion.
-      nvim_cmp = true,
       -- Trigger completion at 2 chars.
       min_chars = 2,
     },
@@ -85,39 +113,6 @@ return {
       return tostring(os.time()) .. '-' .. suffix
     end,
 
-    -- Stamp every note with a system-managed `created` frontmatter field, matching the ISO 8601
-    -- UTC timestamp moneta-notes' core/notes.js writes on note creation (see docs/specs/S003-notes.md).
-    -- Replicates obsidian.nvim's default frontmatter (id, aliases, tags, then any other metadata) and
-    -- only fills in `created` when the note's file doesn't exist on disk yet — i.e. this really is a
-    -- creation, not just any save where the field happens to be missing. This func runs on every
-    -- save (first and subsequent), and plenty of pre-existing notes have no `created` key at all;
-    -- checking "does metadata.created exist" instead of "does the file exist" would stamp today's
-    -- date onto one of those the next time it's merely edited, fabricating a false creation time.
-    ---@param note obsidian.Note
-    ---@return table
-    note_frontmatter_func = function(note)
-      local out = { id = note.id, aliases = note.aliases, tags = note.tags }
-      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-        for k, v in pairs(note.metadata) do
-          out[k] = v
-        end
-      end
-      local is_new_note = note.path == nil or not note.path:is_file()
-      if out.created == nil and is_new_note then
-        out.created = os.date '!%Y-%m-%dT%H:%M:%SZ'
-      end
-      return out
-    end,
-
-    -- Optional, by default when you use `:ObsidianFollowLink` on a link to an external
-    -- URL it will be ignored but you can customize this behavior here.
-    ---@param url string
-    follow_url_func = function(url)
-      -- Open the URL in the default web browser.
-      vim.fn.jobstart { 'open', url } -- Mac OS
-      -- vim.fn.jobstart({"xdg-open", url})  -- linux
-    end,
-
     -- create new notes in the root directory
     notes_subdir = '.',
     new_notes_location = 'notes_subdir',
@@ -127,7 +122,7 @@ return {
       name = 'telescope.nvim',
       -- Optional, configure key mappings for the picker. These are the defaults.
       -- Not all pickers support all mappings.
-      mappings = {
+      note_mappings = {
         -- Create a new note from your query.
         new = '<C-x>',
         -- Insert a link to the selected note.
@@ -154,6 +149,21 @@ return {
 
     for k, v in pairs(localConfig) do
       opts[k] = v
+    end
+
+    -- Silence obsidian.nvim's "ui.checkboxes no longer affects ordering" notice: `ui.checkboxes`
+    -- is still the only way to set custom checkbox glyphs/highlights (order comes from
+    -- `checkbox.order` above), so the warning is unconditional and permanent by design
+    -- (maintainer confirmed no way to opt out: https://github.com/obsidian-nvim/obsidian.nvim/issues/262).
+    if not vim.g.obsidian_ui_checkboxes_notify_filtered then
+      vim.g.obsidian_ui_checkboxes_notify_filtered = true
+      local orig_notify = vim.notify
+      vim.notify = function(msg, level, notify_opts)
+        if type(msg) == 'string' and msg:find("ui.checkboxes' no longer effect", 1, true) then
+          return
+        end
+        return orig_notify(msg, level, notify_opts)
+      end
     end
 
     require('obsidian').setup(opts)
