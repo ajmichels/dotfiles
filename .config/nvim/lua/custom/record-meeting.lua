@@ -163,7 +163,7 @@ Rules:
 - Output ONLY markdown in this exact structure, nothing else, no preamble, no code fences:
 
 ```markdown
-## Claude Meetings Summary
+## Claude Meeting Summary
 
 ### Topics Heading
 
